@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="ILTutorialEnv"
+config/name="rl-agents-in-godot-environment"
 run/main_scene="res://scenes/training_scene.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -71,3 +71,8 @@ requested_jump={
 [physics]
 
 3d/solver/solver_iterations=8
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
