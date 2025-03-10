@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://t2phyfvahqnp"]
 
-[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="1_gbv6m"]
+[ext_resource type="Script" uid="uid://73dw7d262o66" path="res://addons/godot_rl_agents/sync.gd" id="1_gbv6m"]
 [ext_resource type="PackedScene" uid="uid://b2duvi8qycevc" path="res://scenes/level.tscn" id="2_veent"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rsgtu"]

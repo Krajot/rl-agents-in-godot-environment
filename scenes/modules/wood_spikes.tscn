@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://6nkm1wqksnpr"]
 
 [ext_resource type="PackedScene" uid="uid://gd0rvajc8d1m" path="res://assets/wood_spikes.glb" id="1_7v0m4"]
-[ext_resource type="Script" path="res://scripts/player_reseting_obstacle.gd" id="1_pbh54"]
+[ext_resource type="Script" uid="uid://csaphlomn7dnw" path="res://scripts/player_reseting_obstacle.gd" id="1_pbh54"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_33rli"]
 size = Vector3(2, 0.524, 2)

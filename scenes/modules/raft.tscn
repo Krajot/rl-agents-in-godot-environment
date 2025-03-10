@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2sk86fpnbjl6"]
 
-[ext_resource type="Script" path="res://scripts/raft.gd" id="1_jchjo"]
+[ext_resource type="Script" uid="uid://5tlwmhd1a1kh" path="res://scripts/raft.gd" id="1_jchjo"]
 [ext_resource type="PackedScene" uid="uid://cobna7ykikkdd" path="res://assets/raft.glb" id="2_ip762"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uofgp"]

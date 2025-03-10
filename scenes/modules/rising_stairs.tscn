@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvvkkstybm1eo"]
 
-[ext_resource type="Script" path="res://scripts/rising_stairs.gd" id="1_1n52n"]
+[ext_resource type="Script" uid="uid://60bnbpcmawae" path="res://scripts/rising_stairs.gd" id="1_1n52n"]
 [ext_resource type="PackedScene" uid="uid://d25ikeq2hqkch" path="res://assets/stairs.glb" id="1_p13u0"]
 [ext_resource type="PackedScene" uid="uid://dogdqgqh53qlb" path="res://scenes/modules/stone_floor.tscn" id="2_driqe"]
 

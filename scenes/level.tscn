@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://b2duvi8qycevc"]
 
-[ext_resource type="Script" path="res://scripts/level_manager.gd" id="1_p4h1g"]
+[ext_resource type="Script" uid="uid://bpdrogaj804tv" path="res://scripts/level_manager.gd" id="1_p4h1g"]
 [ext_resource type="PackedScene" uid="uid://bnrfbc0r743el" path="res://assets/wall_double_height.glb" id="2_0o5uc"]
 [ext_resource type="PackedScene" uid="uid://dogdqgqh53qlb" path="res://scenes/modules/stone_floor.tscn" id="2_28uad"]
 [ext_resource type="PackedScene" uid="uid://6nkm1wqksnpr" path="res://scenes/modules/wood_spikes.tscn" id="3_kpe18"]
