@@ -81,11 +81,26 @@ func get_reward() -> float:
 
 
 func _physics_process(delta: float) -> void:
-	return
+	# Reset on timeout, this is implemented in parent class to set needs_reset to true,
+	# we are re-implementing here to call player.game_over() that handles the game reset.
+	n_steps += 1
+	if n_steps > reset_after:
+		player.game_over()
 
+	# In training or onnx inference modes, this method will be called by sync node with actions provided,
+	# For expert demo recording mode, it will be called without any actions (as we set the actions based on human input),
+	# For human control mode the method will not be called, so we call it here without any actions provided.
+	if control_mode == ControlModes.HUMAN:
+		set_action()
+
+	# Reset the game faster if the lever is not pulled.
+	steps_without_lever_pulled += 1
+	if steps_without_lever_pulled > 200 and (not player._is_lever_pulled):
+		player.game_over()
 
 func reset():
-	return
+	super.reset()
+	steps_without_lever_pulled = 0
 
 
 # Defines the actions for the AI agent ("size": 2 means 2 floats for this action)
