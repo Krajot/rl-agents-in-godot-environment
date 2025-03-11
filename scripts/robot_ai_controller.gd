@@ -105,16 +105,66 @@ func reset():
 
 # Defines the actions for the AI agent ("size": 2 means 2 floats for this action)
 func get_action_space() -> Dictionary:
-	return {}
+	return {
+		"movement": {"size": 2, "action_type": "continuous"},
+		"rotation": {"size": 1, "action_type": "continuous"},
+		"jump": {"size": 1, "action_type": "continuous"},
+		"use_action": {"size": 1, "action_type": "continuous"}
+	}
 
-
+# We return the action values in the same order as defined in get_action_space() (important), but all in one array
+# For actions of size 1, we return 1 float in the array, for size 2, 2 floats in the array, etc.
+# set_action is called just before get_action by the sync node, so we can read the newly set values
 func get_action():
-	return []
+	return [
+		# "movement" action values
+		player.requested_movement.x,
+		player.requested_movement.y,
+		# "rotation" action value
+		player.requested_rotation.x,
+		# "jump" action value (-1 if not requested, 1 if requested)
+		-1.0 + 2.0 * float(player.jump_requested),
+		# "use_action" action value (-1 if not requested, 1 if requested)
+		-1.0 + 2.0 * float(player.use_action_requested)
+	]
 
-
+# Here we set human control and AI control actions to the robot
 func set_action(action = null) -> void:
-	return
+	# If there's no action provided, it means that AI is not controlling the robot (human control),
+	if not action:
+		# Only rotate if the mouse has moved since the last set_action call
+		if previous_mouse_movement == mouse_movement:
+			mouse_movement = Vector2.ZERO
+
+		player.requested_movement = Input.get_vector(
+			"move_left", "move_right", "move_forward", "move_back"
+		)
+		player.requested_rotation = mouse_movement
+
+		var use_action = Input.is_action_pressed("requested_action")
+		var jump = Input.is_action_pressed("requested_jump")
+
+		player.use_action_requested = use_action
+		player.jump_requested = jump
+
+		previous_mouse_movement = mouse_movement	
+	else:
+		# If there is action provided, we set the actions received from the AI agent 
+		player.requested_movement = Vector2(action.movement[0], action.movement[1])
+		# The agent only rotates the robot along the Y axis, no need to rotate the camera along X axis
+		player.requested_rotation = Vector2(action.rotation[0], 0.0)
+		player.jump_requested = bool(action.jump[0] > 0)
+		player.use_action_requested = bool(action.use_action[0] > 0)
 
 
+# Record mouse movement for human and demo_record modes
+# We don't directly rotate in input to allow for frame skipping (action_repeat setting) which
+# will also be applied to the AI agent in training/inference modes.
 func _input(event):
-	return
+	if not (heuristic == "human" or heuristic == "demo_record"):
+		return
+
+	if event is InputEventMouseMotion:
+		var movement_scale: float = 0.005
+		mouse_movement.y = clampf(event.relative.y * movement_scale, -1.0, 1.0)
+		mouse_movement.x = clampf(event.relative.x * movement_scale, -1.0, 1.0)
